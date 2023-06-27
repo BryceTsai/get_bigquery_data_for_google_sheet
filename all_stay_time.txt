@@ -1,0 +1,17 @@
+SELECT 
+TIMESTAMP_DIFF( TIMESTAMP_MICROS(nextPageViewTime) , TIMESTAMP_MICROS(event_timestamp) , second) as stay_time,
+*
+FROM (
+
+  SELECT
+    ROW_NUMBER() OVER (PARTITION BY user_pseudo_id ORDER BY user_pseudo_id, event_timestamp) AS pageVisitNumber,
+    LEAD(event_timestamp, 1) OVER (PARTITION BY user_pseudo_id ORDER BY event_timestamp ASC) AS nextPageViewTime,
+    *
+FROM 
+    -- 更改為您的bigquery project
+    `{project_id}.{dataset_id}.events_*`
+WHERE
+    _table_suffix BETWEEN '20230615'
+    AND '20230616'
+    AND event_name = "page_view"
+)

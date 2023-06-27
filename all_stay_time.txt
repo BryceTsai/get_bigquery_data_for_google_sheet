@@ -1,3 +1,5 @@
+
+-- TIMESTAMP_MICROS 的計算是毫秒，但TIMESTAMP_DIFF的計算會轉換為秒
 SELECT 
 TIMESTAMP_DIFF( TIMESTAMP_MICROS(nextPageViewTime) , TIMESTAMP_MICROS(event_timestamp) , second) as stay_time,
 *

@@ -1,0 +1,9 @@
+SELECT
+  ROW_NUMBER() OVER (PARTITION BY user_pseudo_id ORDER BY user_pseudo_id, event_timestamp) AS user_event_number,
+  *
+FROM 
+    -- 更改為您的bigquery project
+    `{project_id}.{dataset_id}.events_*`
+WHERE
+  event_name = "page_view"
+ORDER BY user_pseudo_id,event_timestamp

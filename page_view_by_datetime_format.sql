@@ -31,11 +31,7 @@ SELECT
     format("%02d",extract(minute from timestamp_micros(event_timestamp))) as minute,
     -- date hour and minute (dimension)
     concat(concat(event_date,cast(format("%02d",extract(hour from timestamp_micros(event_timestamp))) as string)),format("%02d",extract(minute from timestamp_micros(event_timestamp)))) as date_hour_and_minute
-
-FROM 
-    -- 更改為您的bigquery project
-    `{project_id}.{dataset_id}.events_*`
-WHERE
-    _table_suffix BETWEEN '20230615'
-    AND '20230616'
-    AND event_name = "page_view"
+FROM    -- 更改為您的bigquery project
+    `merkle-taiwan-training.ga4_sample_data.events_20201130`
+WHERE event_name = 'page_view' OR event_name = 'screen_view'
+ORDER BY Hour, Minute

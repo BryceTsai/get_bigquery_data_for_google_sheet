@@ -5,10 +5,10 @@ select
         countif(event_name = 'page_view') as page_views
 from
     -- 更改為您的bigquery project
-    `{project_id}.{dataset_id}.events_*`
+    `merkle-taiwan-training.ga4_sample_data.events_*`
 where
     -- 設定查詢日期
-    _table_suffix between '20230612'
+    _table_suffix between '20201130'
     and format_date('%Y%m%d',date_sub(current_date(), interval 1 day))
 group by
     pagepath_level_1,

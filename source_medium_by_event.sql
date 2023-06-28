@@ -17,6 +17,7 @@ FROM (
             (SELECT value.string_value FROM UNNEST(event_params) WHERE key = 'page_location') AS page_location,
             (SELECT value.string_value FROM UNNEST(event_params) WHERE key = 'source') AS source_value,
             (SELECT value.string_value FROM UNNEST(event_params) WHERE key = 'medium') AS medium_value
+            --更改下面的project id、dataset id、table id
         FROM `merkle-taiwan-training.ga4_sample_data.events_20210131`
         WHERE event_name = 'page_view' AND (SELECT value.string_value FROM UNNEST(event_params) WHERE key = 'medium') IS NOT NULL
         GROUP BY 1,2,3,4,5

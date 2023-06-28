@@ -7,6 +7,7 @@ var DATASET_ID = "ga4_sample_data";
 var TABLE_ID = "events_20201130";
 if (!PROJECT_ID) throw Error('Project ID is required in setup');
 
+// Replace this value with your Google Sheet ID
 var sheetId = "your google sheet id";
 var sheetName = "your google sheet name";
 

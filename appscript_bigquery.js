@@ -1,23 +1,16 @@
 
-// Filename for data results
-var QUERY_NAME = "Most common words in all of Shakespeare's works";
+
+var QUERY_NAME = "Merkle GA4 Workshop - BigQuery Results";
 // Replace this value with your Google Cloud API project ID
-var PROJECT_ID = "your project id";
-var DATA_SET = "your bigquery dataset id";
+var PROJECT_ID = "merkle-taiwan-training";
+var DATASET_ID = "ga4_sample_data";
+var TABLE_ID = "events_20201130";
 if (!PROJECT_ID) throw Error('Project ID is required in setup');
 
 var sheetId = "your google sheet id";
 var sheetName = "your google sheet name";
 
-/**
-  * Runs a BigQuery query; puts results into Sheet. You must enable
-  * the BigQuery advanced service before you can run this code.
-  * @see http://developers.google.com/apps-script/advanced/bigquery#run_query
-  * @see http://github.com/gsuitedevs/apps-script-samples/blob/master/advanced/bigquery.gs
-  *
-  * @returns {Spreadsheet} Returns a spreadsheet with BigQuery results
-  * @see http://developers.google.com/apps-script/reference/spreadsheet/spreadsheet
-  */
+
 function runQuery() {
   // Replace sample with your own BigQuery query.
   var request = {
@@ -27,7 +20,7 @@ function runQuery() {
     "EXTRACT(MINUTE FROM TIMESTAMP_MICROS(event_timestamp) AT TIME ZONE 'UTC+8') AS Minute, "+
     "(SELECT value.string_value FROM UNNEST(event_params) WHERE key = 'page_location') AS page, "+
     "(SELECT value.string_value FROM UNNEST(event_params) WHERE key = 'page_title') AS title "+
-    "FROM `"+PROJECT_ID+"."+DATA_SET+".events_intraday_*` "+
+    "FROM `" + PROJECT_ID + "." + DATASET_ID +"."+TABLE_ID+"` "+
     "WHERE event_name = 'page_view' OR event_name = 'screen_view' "+
     "GROUP BY 2,3,4,5,6 ORDER BY Date, Hour DESC,Minute DESC "
   };

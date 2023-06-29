@@ -7,4 +7,4 @@ SELECT
 FROM    -- 更改為您的bigquery project
     `merkle-taiwan-training.ga4_sample_data.events_20201130`
 WHERE event_name = 'page_view' OR event_name = 'screen_view'
-ORDER BY Hour, Minute
+ORDER BY Hour DESC, Minute
